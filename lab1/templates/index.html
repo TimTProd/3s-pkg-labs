@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Цветовые модели</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main>
+        <h1>Цветовые модели</h1>
+        <p>Вариант 8: RGB, XYZ, HSV (XYZ — D65/2°, формулы easyrgb.com)</p>
+        <div id="colorPreview"></div>
+        <p>Цвет: <span id="hexValue">#4F86C6</span></p>
+        <p id="warning"></p>
+
+        <div class="models">
+            <fieldset class="model" data-model="rgb">
+                <legend>RGB</legend>
+                <label>Палитра <input class="palette" type="color" value="#4f86c6" aria-label="Палитра RGB"></label>
+                <div class="component" data-name="r">
+                    <label for="rgb-r-number">R</label>
+                    <input id="rgb-r-number" class="number" type="number" min="0" max="255" step="1" value="79">
+                    <input class="slider" type="range" min="0" max="255" step="1" value="79">
+                </div>
+                <div class="component" data-name="g">
+                    <label for="rgb-g-number">G</label>
+                    <input id="rgb-g-number" class="number" type="number" min="0" max="255" step="1" value="134">
+                    <input class="slider" type="range" min="0" max="255" step="1" value="134">
+                </div>
+                <div class="component" data-name="b">
+                    <label for="rgb-b-number">B</label>
+                    <input id="rgb-b-number" class="number" type="number" min="0" max="255" step="1" value="198">
+                    <input class="slider" type="range" min="0" max="255" step="1" value="198">
+                </div>
+            </fieldset>
+
+            <fieldset class="model" data-model="xyz">
+                <legend>XYZ</legend>
+                <label>Палитра <input class="palette" type="color" value="#4f86c6" aria-label="Палитра XYZ"></label>
+                <div class="component" data-name="x">
+                    <label for="xyz-x-number">X</label>
+                    <input id="xyz-x-number" class="number" type="number" min="0" max="100" step="0.01">
+                    <input class="slider" type="range" min="0" max="100" step="0.01">
+                </div>
+                <div class="component" data-name="y">
+                    <label for="xyz-y-number">Y</label>
+                    <input id="xyz-y-number" class="number" type="number" min="0" max="100" step="0.01">
+                    <input class="slider" type="range" min="0" max="100" step="0.01">
+                </div>
+                <div class="component" data-name="z">
+                    <label for="xyz-z-number">Z</label>
+                    <input id="xyz-z-number" class="number" type="number" min="0" max="110" step="0.01">
+                    <input class="slider" type="range" min="0" max="110" step="0.01">
+                </div>
+            </fieldset>
+
+            <fieldset class="model" data-model="hsv">
+                <legend>HSV</legend>
+                <label>Палитра <input class="palette" type="color" value="#4f86c6" aria-label="Палитра HSV"></label>
+                <div class="component" data-name="h">
+                    <label for="hsv-h-number">H</label>
+                    <input id="hsv-h-number" class="number" type="number" min="0" max="360" step="0.1">
+                    <input class="slider" type="range" min="0" max="360" step="0.1">
+                </div>
+                <div class="component" data-name="s">
+                    <label for="hsv-s-number">S</label>
+                    <input id="hsv-s-number" class="number" type="number" min="0" max="100" step="0.1">
+                    <input class="slider" type="range" min="0" max="100" step="0.1">
+                </div>
+                <div class="component" data-name="v">
+                    <label for="hsv-v-number">V</label>
+                    <input id="hsv-v-number" class="number" type="number" min="0" max="100" step="0.1">
+                    <input class="slider" type="range" min="0" max="100" step="0.1">
+                </div>
+            </fieldset>
+        </div>
+    </main>
+    <script src="{{ url_for('static', filename='model.js') }}"></script>
+    <script src="{{ url_for('static', filename='view.js') }}"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
