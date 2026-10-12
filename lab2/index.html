@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Информация о графических файлах</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Информация о графических файлах</h1>
+
+<p>
+  Папка: <input id="folder" type="file" webkitdirectory multiple>
+  Файлы: <input id="files" type="file" multiple>
+</p>
+
+<p>
+  <progress id="bar" value="0" max="1"></progress>
+  <span id="progressText"></span>
+</p>
+
+<p id="stats"></p>
+
+<p>
+  Показать:
+  <select id="filter">
+    <option value="all">Все</option>
+    <option value="ok">Корректные</option>
+    <option value="damaged">Повреждённые</option>
+    <option value="unknown">Не изображения</option>
+    <option value="note">Не то расширение</option>
+  </select>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>№</th>
+      <th>Имя файла</th>
+      <th>Формат</th>
+      <th>Размер, пикс.</th>
+      <th>DPI</th>
+      <th>Глубина цвета, бит</th>
+      <th>Сжатие</th>
+      <th>Размер файла</th>
+      <th>Статус</th>
+      <th>Дополнительно</th>
+    </tr>
+  </thead>
+  <tbody id="rows"></tbody>
+</table>
+
+<p>
+  <button id="prev">←</button>
+  <span id="pageInfo"></span>
+  <button id="next">→</button>
+</p>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

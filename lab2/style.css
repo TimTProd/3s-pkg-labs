@@ -1,0 +1,8 @@
+body { font-family: sans-serif; font-size: 14px; margin: 20px; }
+progress { width: 300px; }
+table { border-collapse: collapse; }
+th, td { border: 1px solid #ccc; padding: 4px 8px; text-align: left; vertical-align: top; }
+th { background: #eee; }
+.damaged { color: #c00; }
+.unknown { color: #888; }
+.note { color: #b60; }
