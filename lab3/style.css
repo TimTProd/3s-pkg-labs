@@ -1,0 +1,10 @@
+body { font-family: Arial, sans-serif; margin: 20px; max-width: 1400px; }
+h1 { font-size: 22px; }
+.panel { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 12px; padding: 10px; border: 1px solid #ccc; }
+.panel input[type=number] { width: 70px; }
+#results { display: flex; flex-wrap: wrap; gap: 16px; }
+figure { margin: 0; width: 360px; }
+figure canvas { width: 100%; border: 1px solid #999; display: block; background: #eee; }
+figure .hist { margin-top: 4px; height: 90px; }
+figcaption { font-size: 14px; margin-bottom: 4px; }
+.hidden { display: none; }
