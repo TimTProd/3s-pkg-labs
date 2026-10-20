@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Базовые растровые алгоритмы</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Базовые растровые алгоритмы</h1>
+
+<section class="panel">
+  <label>Алгоритм
+    <select id="algorithm">
+      <option value="step">Пошаговый</option>
+      <option value="dda">ЦДА</option>
+      <option value="bresenham">Брезенхем (отрезок)</option>
+      <option value="wu">Ву (сглаживание)</option>
+      <option value="castle">Кастл-Питвей</option>
+      <option value="circle">Брезенхем (окружность)</option>
+    </select>
+  </label>
+  <span id="labelStart">Начало</span>
+  <label>x <input id="x0" type="number" value="1"></label>
+  <label>y <input id="y0" type="number" value="1"></label>
+  <span class="for-line">Конец</span>
+  <label class="for-line">x <input id="x1" type="number" value="10"></label>
+  <label class="for-line">y <input id="y1" type="number" value="6"></label>
+  <label class="for-circle">R <input id="r" type="number" min="0" value="6"></label>
+  <button id="build">Построить</button>
+  <button id="example">Пример</button>
+  <button id="fit">Вписать</button>
+</section>
+
+<section class="panel">
+  <label>Масштаб <input id="scale" type="range" min="4" max="80" value="30"></label>
+  <label><input id="ideal" type="checkbox" checked> идеальная линия</label>
+  <label><input id="values" type="checkbox" checked> яркость пикселей</label>
+  <span id="cursor"></span>
+</section>
+
+<canvas id="grid"></canvas>
+<p id="info"></p>
+<p class="note">Целые координаты (x; y) соответствуют центрам клеток дискретной сетки: клетка (x; y) занимает на плоскости квадрат от x − 0,5 до x + 0,5 по горизонтали и от y − 0,5 до y + 0,5 по вертикали. Линии сетки проходят по границам клеток, то есть по полуцелым значениям, а оси координат – через центры клеток с номером 0. Масштаб меняется ползунком или колёсиком мыши, сетку можно сдвигать мышью.</p>
+
+<h2>Пошаговые вычисления</h2>
+<table id="trace"></table>
+
+<h2>Стресс-тест</h2>
+<p>100 000 случайных отрезков во всех 8 октантах и 50 000 окружностей. Время измеряется только для заполнения виртуального растра, без отрисовки; дополнительно – время чистых вычислений без записи в растр.</p>
+<p><button id="runBench">Запустить</button> <progress id="bar" value="0" max="1"></progress> <span id="barText"></span></p>
+<p id="octants"></p>
+<div class="charts">
+  <canvas id="chart1"></canvas>
+  <canvas id="chart2"></canvas>
+  <canvas id="chart3"></canvas>
+  <canvas id="chart4"></canvas>
+  <canvas id="chart5"></canvas>
+  <canvas id="chart6"></canvas>
+</div>
+<table id="totals"></table>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -16,14 +16,16 @@ jobs:
       - uses: actions/checkout@v4
       - name: build
         run: |
-          mkdir -p _site/lab1 _site/lab2 _site/lab3
+          mkdir -p _site/lab1 _site/lab2 _site/lab3 _site/lab4
           cp -r lab1/static _site/lab1/static
           sed -E "s#\{\{ url_for\('static', filename='([^']+)'\) \}\}#static/\1#g" lab1/templates/index.html > _site/lab1/index.html
           cp lab2/index.html lab2/style.css _site/lab2/
           cp -r lab2/js _site/lab2/js
           cp lab3/index.html lab3/style.css _site/lab3/
           cp -r lab3/js lab3/images _site/lab3/
-          printf '<!doctype html><meta charset="utf-8"><title>ПКГ</title><ul><li><a href="lab1/">Лаба 1</a></li><li><a href="lab2/">Лаба 2</a></li><li><a href="lab3/">Лаба 3</a></li></ul>' > _site/index.html
+          cp lab4/index.html lab4/style.css _site/lab4/
+          cp -r lab4/js _site/lab4/js
+          printf '<!doctype html><meta charset="utf-8"><title>ПКГ</title><ul><li><a href="lab1/">Лаба 1</a></li><li><a href="lab2/">Лаба 2</a></li><li><a href="lab3/">Лаба 3</a></li><li><a href="lab4/">Лаба 4</a></li></ul>' > _site/index.html
       - uses: actions/configure-pages@v5
         id: cfg
       - uses: actions/upload-pages-artifact@v3
