@@ -57,7 +57,7 @@ async function selectSource(url) {
   status.textContent = source.width + "×" + source.height;
 }
 
-function makeFigure(title, data, width, height, thresholds, withHistogram = true) {
+function makeFigure(title, data, width, height, thresholds) {
   const figure = document.createElement("figure");
   const caption = document.createElement("figcaption");
   caption.textContent = title;
@@ -66,12 +66,10 @@ function makeFigure(title, data, width, height, thresholds, withHistogram = true
   canvas.height = height;
   canvas.getContext("2d").putImageData(new ImageData(new Uint8ClampedArray(data), width, height), 0, 0);
   figure.append(caption, canvas);
-  if (withHistogram) {
-    const hist = document.createElement("canvas");
-    hist.className = "hist";
-    drawHistogram(hist, histogram(toGray(data, width, height)), thresholds);
-    figure.append(hist);
-  }
+  const hist = document.createElement("canvas");
+  hist.className = "hist";
+  drawHistogram(hist, histogram(toGray(data, width, height)), thresholds);
+  figure.append(hist);
   return figure;
 }
 
@@ -83,10 +81,28 @@ function drawHistogram(canvas, bins, thresholds) {
   ctx.fillRect(0, 0, 256, 90);
   let max = 0;
   for (let i = 0; i < 256; i++) if (bins[i] > max) max = bins[i];
-  ctx.fillStyle = "#444";
+  let total = 0;
+  let filled = 0;
   for (let i = 0; i < 256; i++) {
-    const h = max ? Math.round((bins[i] / max) * 88) : 0;
-    ctx.fillRect(i, 90 - h, 1, h);
+    total += bins[i];
+    if (bins[i] > 0) filled++;
+  }
+  ctx.fillStyle = "#444";
+  if (filled <= 2) {
+    ctx.font = "12px Arial";
+    for (const i of [0, 255]) {
+      const h = max ? Math.round((bins[i] / max) * 64) : 0;
+      const x = i === 0 ? 20 : 196;
+      ctx.fillStyle = "#444";
+      ctx.fillRect(x, 74 - h, 40, h);
+      ctx.fillStyle = "#000";
+      ctx.fillText((i === 0 ? "чёрные " : "белые ") + (total ? ((bins[i] / total) * 100).toFixed(1) : 0) + "%", i === 0 ? 8 : 184, 85);
+    }
+  } else {
+    for (let i = 0; i < 256; i++) {
+      const h = max ? Math.round((bins[i] / max) * 88) : 0;
+      ctx.fillRect(i, 90 - h, 1, h);
+    }
   }
   const colors = ["#d00", "#0a0", "#00d"];
   thresholds.forEach((t, i) => {
@@ -140,8 +156,7 @@ async function apply(ops) {
   const thresholds = [];
   for (const op of ops) {
     const result = await process(op);
-    const binary = result.threshold !== null || op === "sauvola";
-    results.appendChild(makeFigure(describe(result), result.data, result.width, result.height, [], !binary));
+    results.appendChild(makeFigure(describe(result), result.data, result.width, result.height, []));
     if (result.threshold !== null) thresholds.push(result.threshold);
   }
   if (thresholds.length) {
