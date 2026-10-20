@@ -74,40 +74,27 @@ function makeFigure(title, data, width, height, thresholds) {
 }
 
 function drawHistogram(canvas, bins, thresholds) {
-  canvas.width = 256;
-  canvas.height = 90;
+  canvas.width = 532;
+  canvas.height = 130;
   const ctx = canvas.getContext("2d");
   ctx.fillStyle = "#fff";
-  ctx.fillRect(0, 0, 256, 90);
+  ctx.fillRect(0, 0, 532, 130);
   let max = 0;
   for (let i = 0; i < 256; i++) if (bins[i] > max) max = bins[i];
-  let total = 0;
-  let filled = 0;
-  for (let i = 0; i < 256; i++) {
-    total += bins[i];
-    if (bins[i] > 0) filled++;
-  }
   ctx.fillStyle = "#444";
-  if (filled <= 2) {
-    ctx.font = "12px Arial";
-    for (const i of [0, 255]) {
-      const h = max ? Math.round((bins[i] / max) * 64) : 0;
-      const x = i === 0 ? 20 : 196;
-      ctx.fillStyle = "#444";
-      ctx.fillRect(x, 74 - h, 40, h);
-      ctx.fillStyle = "#000";
-      ctx.fillText((i === 0 ? "чёрные " : "белые ") + (total ? ((bins[i] / total) * 100).toFixed(1) : 0) + "%", i === 0 ? 8 : 184, 85);
-    }
-  } else {
-    for (let i = 0; i < 256; i++) {
-      const h = max ? Math.round((bins[i] / max) * 88) : 0;
-      ctx.fillRect(i, 90 - h, 1, h);
-    }
+  for (let i = 0; i < 256; i++) {
+    const h = max ? Math.round((bins[i] / max) * 100) : 0;
+    ctx.fillRect(10 + i * 2, 110 - h, 2, Math.max(h, bins[i] > 0 ? 2 : 0));
   }
+  ctx.fillStyle = "#000";
+  ctx.fillRect(10, 110, 512, 1);
+  ctx.font = "11px Arial";
+  ctx.fillText("0", 6, 124);
+  ctx.fillText("255", 504, 124);
   const colors = ["#d00", "#0a0", "#00d"];
   thresholds.forEach((t, i) => {
     ctx.fillStyle = colors[i % colors.length];
-    ctx.fillRect(t, 0, 1, 90);
+    ctx.fillRect(10 + t * 2, 0, 2, 110);
   });
 }
 

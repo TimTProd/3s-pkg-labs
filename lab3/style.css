@@ -5,6 +5,6 @@ h1 { font-size: 22px; }
 #results { display: flex; flex-wrap: wrap; gap: 16px; }
 figure { margin: 0; width: 360px; }
 figure canvas { width: 100%; border: 1px solid #999; display: block; background: #eee; }
-figure .hist { margin-top: 4px; height: 90px; }
+figure .hist { margin-top: 4px; height: auto; }
 figcaption { font-size: 14px; margin-bottom: 4px; }
 .hidden { display: none; }
