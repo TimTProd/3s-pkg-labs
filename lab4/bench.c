@@ -61,7 +61,7 @@ static void dda_line(int x0, int y0, int x1, int y1) {
     double x = x0;
     double y = y0;
     for (int i = 0; i <= length; i++) {
-        put((int)floor(x + 0.5), (int)floor(y + 0.5));
+        put((int)floor(x + 1e-9), (int)floor(y + 1e-9));
         x += ix;
         y += iy;
     }

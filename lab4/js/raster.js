@@ -45,8 +45,8 @@ export function ddaLine(x0, y0, x1, y1, target, trace) {
   let x = x0;
   let y = y0;
   for (let i = 0; i <= length; i++) {
-    const px = round(x);
-    const py = round(y);
+    const px = Math.floor(x + 1e-9);
+    const py = Math.floor(y + 1e-9);
     target.setPixel(px, py, 1);
     if (trace) trace.push([i, x.toFixed(3), y.toFixed(3), px, py]);
     x += ix;
