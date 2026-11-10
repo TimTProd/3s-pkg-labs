@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ru">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ЛР 5 · Отсечение</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<header><span>ПКГ / 05</span><h1>Отсечение отрезков и многоугольников</h1><p>Вариант 8 · группа 10Б · ε = 10⁻⁷</p></header>
+<main>
+<section class="controls">
+<label>Алгоритм<select id="mode"><option value="liang">Лианг—Барски · прямоугольник</option><option value="cohen">Сазерленд—Коэн · сравнение</option><option value="cyrus">Сайрус—Бек · выпуклое окно</option><option value="polygon">Грейнер—Хорман · многоугольники</option></select></label>
+<div class="row"><button id="example">Пример</button><button id="fit">Вписать</button><button id="add">Добавить отрезок</button></div>
+<label>Файл с отрезками<input id="file" type="file" accept=".txt"></label>
+<label>n / x1 y1 x2 y2 / xmin ymin xmax ymax<textarea id="input" rows="6">7
+-16 0 16 0
+0 -12 0 12
+-8 -6 8 -6
+-8 -6 -8 -6
+-16 -12 16 12
+12 8 14 10
+-12 9 11 -8
+-8 -6 8 6</textarea></label><button id="load">Применить данные</button>
+<details id="polygons"><summary>Многоугольники: JSON и примеры</summary><label>Выпуклое окно Сайруса—Бека<textarea id="convex" rows="3">[[-8,-4],[0,-8],[9,-2],[6,7],[-6,7]]</textarea></label><button id="setConvex">Применить окно</button><label>Исходные контуры (even-odd)<textarea id="subject" rows="4"></textarea></label><label>Контуры отсекателя<textarea id="clip" rows="3"></textarea></label><div class="row"><button id="applyPoly">Отсечь</button><select id="polyExample"><option value="split">Распад на части</option><option value="hole">С дырой</option><option value="self">Самопересечение</option><option value="vertex">Через вершины</option></select></div></details>
+<details open><summary>Большие данные</summary><label>Число отрезков<input id="count" type="number" value="500000" min="1" max="2000000"></label><label>Глубина Quadtree<input id="depth" type="number" min="1" max="12" value="7"></label><label>Плотность<select id="density"><option>.5</option><option selected>1</option><option>2</option><option>4</option></select></label><button id="generate">Построить поток и Quadtree</button><label class="check"><input id="animate" type="checkbox">Динамика: 1000 отрезков за кадр + окно</label><label class="check"><input id="index" type="checkbox" checked>Использовать Quadtree + AABB</label><button id="bench">Измерить глубину и плотность</button><button id="download" disabled>Скачать измерения JSON</button></details>
+</section>
+<section class="view"><div class="legend"><span class="source">● Исходные</span><span class="window">● Окно</span><span class="result">● Результат</span></div><canvas id="canvas" width="1100" height="740"></canvas><p class="hint">Тяните вершины и рёбра окна, концы и середины отрезков. Пустое место — сдвиг системы координат. Колесо — масштаб к курсору. Большой поток: рисуются все исходные отрезки в видимой области, не случайная выборка.</p><output id="status"></output><output id="error" role="alert"></output><details open><summary>Арифметические операции выбранного кадра</summary><div id="stats"></div><p>Только отсечение: × и ÷. Сложение, сравнения, индекс и отрисовка не входят. Сравнение без AABB доступно в стресс-тесте.</p></details><details><summary>Параметры Лианга—Барски для первого отрезка</summary><pre id="trace"></pre></details><section id="charts"></section><p class="hint">Грейнер—Хорман: двусвязные контуры, вставка пересечений, entry/exit, переход между контурами. Для дыр, самопересечений и совпавших границ — дополнительный граф границ с even-odd. Касание точкой или отрезком не образует площадь и в полигональном режиме не выводится. Геометрия с деталями порядка ε ограничена численной точностью. Запрос Quadtree зависит от числа кандидатов и пересечений, не гарантирует O(log N). 60 FPS — измеряемая цель, не гарантия.</p></section>
+</main><script type="module" src="js/app.js"></script></body></html>

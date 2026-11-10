@@ -6,3 +6,4 @@
 - [Лаба 2](https://timtprod.github.io/3s-pkg-labs/lab2/)
 - [Лаба 3](https://timtprod.github.io/3s-pkg-labs/lab3/)
 - [Лаба 4](https://timtprod.github.io/3s-pkg-labs/lab4/)
+- [Лаба 5](https://timtprod.github.io/3s-pkg-labs/lab5/)
